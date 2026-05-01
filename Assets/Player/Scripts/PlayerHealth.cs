@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
 
     int currentHealth;
     bool isDead;
+    private bool _isDying = false;
+    private bool _isRespawning = false;
     Vector3 startPos;
 
     // UI Ч можно подписатьс€ на это событие снаружи
@@ -23,8 +25,14 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null) instance = this;
-        else if (instance == this) Destroy(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -35,13 +43,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (isDead) return;
+        if (isDead || _isDying) return;
         currentHealth = Mathf.Max(0, currentHealth - amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        Debug.Log("damage player");
-
         if (currentHealth <= 0) StartCoroutine(DieRoutine());
+
     }
 
     IEnumerator DieRoutine()
@@ -49,8 +56,11 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         OnDied?.Invoke();
 
+        //gameObject.SetActive(false);
+
         // ќтключаем управление
         GetComponent<PlayerController>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
         GetComponent<WeaponSwitcher>().enabled = false;
         GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
@@ -59,10 +69,13 @@ public class PlayerHealth : MonoBehaviour
 
         yield return new WaitForSeconds(respawnDelay);
         Respawn();
+        _isDying = false;
     }
 
     void Respawn()
     {
+        if (_isRespawning) return;
+        _isRespawning = true;
         /*transform.position = respawnPoint != null ? respawnPoint.position : startPos;
         currentHealth = maxHealth;
         isDead = false;

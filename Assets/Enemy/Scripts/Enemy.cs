@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IEnemy
     Transform player;
     Rigidbody2D rb;
 
+    public event System.Action OnDied;
     void Start()
     {
         health = maxHealth;
@@ -40,6 +41,13 @@ public class Enemy : MonoBehaviour, IEnemy
         else
         {
             rb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PlayerHealth>())
+        {
             TryAttack();
         }
     }
@@ -54,13 +62,12 @@ public class Enemy : MonoBehaviour, IEnemy
     public void TakeDamage(int amount)
     {
         health -= amount;
-        Debug.Log("damage");
         if (health <= 0) Die();
     }
 
     void Die()
     {
-        // Место для эффектов / дропа
+        OnDied?.Invoke();
         Destroy(gameObject);
     }
 }

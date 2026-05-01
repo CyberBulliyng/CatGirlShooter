@@ -33,8 +33,14 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null) instance = this;
-        else if (instance == this) Destroy(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
