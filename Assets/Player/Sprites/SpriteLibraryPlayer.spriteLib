@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Idle_atlas_0
+      m_Hash: 140298841
+      m_Sprite: {fileID: -730280752187124028, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -730280752187124028, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+    - m_Name: Idle_atlas_1
+      m_Hash: 1062992591
+      m_Sprite: {fileID: 1064275413, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1064275413, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+    - m_Name: Idle_atlas_2
+      m_Hash: 642952053
+      m_Sprite: {fileID: 144907787, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 144907787, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+    - m_Name: Idle_atlas_3
+      m_Hash: 290823139
+      m_Sprite: {fileID: -1228274035, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1228274035, guid: 62c41a967300f104db295acf7fec36e7, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Walk_Atlas_0
+      m_Hash: 459127543
+      m_Sprite: {fileID: -8321437933019174625, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8321437933019174625, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_1
+      m_Hash: 744131169
+      m_Sprite: {fileID: 1862490157, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1862490157, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_2
+      m_Hash: 894688219
+      m_Sprite: {fileID: -1632233162, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1632233162, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_3
+      m_Hash: 39119693
+      m_Sprite: {fileID: -1685085676, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1685085676, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_4
+      m_Hash: 472940270
+      m_Sprite: {fileID: 572092735, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 572092735, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_5
+      m_Hash: 725044856
+      m_Sprite: {fileID: 588501314, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 588501314, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_6
+      m_Hash: 842932162
+      m_Sprite: {fileID: -1462549159, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1462549159, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    - m_Name: Walk_Atlas_7
+      m_Hash: 87633748
+      m_Sprite: {fileID: -88837020, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -88837020, guid: e0f0279a257c513408df6979685a2b9a, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 8
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 639132316082989436
+  m_Version: 1
