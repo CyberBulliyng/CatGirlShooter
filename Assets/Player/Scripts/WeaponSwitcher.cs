@@ -15,6 +15,10 @@ public class WeaponSwitcher : MonoBehaviour
     int currentIndex = 0;
     WeaponBase current;
 
+    public System.Action<int> OnWeaponChanged;
+    public int CurrentIndex => currentIndex;
+    public WeaponBase CurrentWeapon => current;
+
     void OnEnable()
     {
         shootAction.action.Enable();
@@ -63,9 +67,11 @@ public class WeaponSwitcher : MonoBehaviour
 
     void EquipWeapon(int index)
     {
+        if (index == currentIndex && current != null) return;
         foreach (var w in weapons) w.gameObject.SetActive(false);
         currentIndex = index;
         current = weapons[index];
         current.gameObject.SetActive(true);
+        OnWeaponChanged?.Invoke(currentIndex);
     }
 }

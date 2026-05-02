@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth instance;
 
     [Header("Health")]
-    public int maxHealth = 5;
+    public int maxHealth = 6;
     public float respawnDelay = 2f;
     public Transform respawnPoint;       // если null — возрождается на стартовой позиции
 
@@ -22,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
     public event Action<int, int> OnHealthChanged; // (current, max)
     public event Action OnDied;
     public event Action OnRespawned;
+
+    public int CurrentHealth => currentHealth;
+    public int MaxHealth => maxHealth;
 
     void Awake()
     {
@@ -39,6 +42,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         startPos = transform.position;
+
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     public void TakeDamage(int amount)
@@ -49,6 +54,13 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0) StartCoroutine(DieRoutine());
 
+    }
+
+    public void Heal(int amount)
+    {
+        if (isDead || _isDying) return;
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
     IEnumerator DieRoutine()

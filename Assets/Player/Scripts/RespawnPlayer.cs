@@ -9,10 +9,14 @@ public class RespawnPlayer : MonoBehaviour
     {
         if (PlayerHealth.instance != null)
         {
-            // —начала отписываемс€ Ч защита от двойной подписки
-            PlayerHealth.instance.OnRespawned -= Respawn;
-            PlayerHealth.instance.OnRespawned += Respawn;
+            PlayerHealth.instance.OnDied -= OnPlayerDied;
+            PlayerHealth.instance.OnDied += OnPlayerDied;
         }
+    }
+
+    void OnPlayerDied()
+    {
+        FindObjectOfType<GameManager>().Lose();
     }
 
     private void OnDestroy()

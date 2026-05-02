@@ -10,11 +10,17 @@ public class Enemy : MonoBehaviour, IEnemy
     public float attackRange = 0.6f;
     public int contactDamage = 1;
     public float attackCooldown = 1f;
+    public GameObject healDropPrefab;
+    public GameObject fountain;
+    public float switchDistance = 3f;
 
     int health;
     float nextAttack;
     Transform player;
     Rigidbody2D rb;
+
+    [Range(0f, 1f)]
+    public float dropChance = 0.5f;
 
     public event System.Action OnDied;
     void Start()
@@ -26,21 +32,45 @@ public class Enemy : MonoBehaviour, IEnemy
 
         var p = PlayerController.instance;
         if (p) player = p.transform;
+
+        if (fountain == null)
+        {
+            GameObject f = GameObject.FindWithTag("Fontaine");
+            if (f != null)
+                fountain = f;
+        }
+    }
+
+    Transform GetTarget()
+    {
+        if (fountain == null) return player;
+
+        float distToPlayer = Vector2.Distance(transform.position, player.position);
+        float distToFountain = Vector2.Distance(transform.position, fountain.transform.position);
+
+        return distToFountain < distToPlayer ? fountain.transform : player;
     }
 
     void FixedUpdate()
     {
         if (player == null) return;
 
-        float dist = Vector2.Distance(transform.position, player.position);
+        Transform target = GetTarget();
+
+        float dist = Vector2.Distance(transform.position, target.position);
+
         if (dist > attackRange)
         {
-            Vector2 dir = (player.position - transform.position).normalized;
+            Vector2 dir = (target.position - transform.position).normalized;
             rb.linearVelocity = dir * moveSpeed;
         }
         else
         {
             rb.linearVelocity = Vector2.zero;
+
+            // атакуем только игрока
+            if (target == player)
+                TryAttack();
         }
     }
 
@@ -68,6 +98,10 @@ public class Enemy : MonoBehaviour, IEnemy
     void Die()
     {
         OnDied?.Invoke();
+        if (Random.value <= dropChance)
+        {
+            Instantiate(healDropPrefab, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 }
