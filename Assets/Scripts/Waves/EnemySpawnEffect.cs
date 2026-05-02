@@ -11,9 +11,17 @@ public class EnemySpawnEffect : MonoBehaviour
     public float riseDuration = 0.8f;
 
     private SpriteMask currentMask;
+    private Transform cachedTransform;
+
+    void Awake()
+    {
+        cachedTransform = transform;
+    }
 
     public IEnumerator PlaySpawnEffect()
     {
+        if (cachedTransform == null) yield break;
+
         Vector3 spawnPos = transform.position;
         GameObject dirt = null;
         // 1. Создаём обычную землю (фон)
@@ -30,7 +38,8 @@ public class EnemySpawnEffect : MonoBehaviour
 
         // 3. Прячем врага под землю
         Vector3 hiddenPos = spawnPos - new Vector3(0, riseDistance, 0);
-        transform.position = hiddenPos;
+        if (cachedTransform == null) yield break;
+        cachedTransform.position = hiddenPos;
 
         var col = GetComponent<Collider2D>();
         var rb = GetComponent<Rigidbody2D>();
@@ -42,13 +51,20 @@ public class EnemySpawnEffect : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < riseDuration)
         {
+            if (cachedTransform == null) yield break;
+
             elapsed += Time.deltaTime;
             float t = elapsed / riseDuration;
-            transform.position = Vector3.Lerp(hiddenPos, spawnPos, Mathf.SmoothStep(0f, 1f, t));
+            cachedTransform.position = Vector3.Lerp(
+                            hiddenPos,
+                            spawnPos,
+                            Mathf.SmoothStep(0f, 1f, t)
+                        ); 
             yield return null;
         }
 
-        transform.position = spawnPos;
+        if (cachedTransform == null) yield break;
+        cachedTransform.position = spawnPos;
 
         if (col) col.enabled = true;
 

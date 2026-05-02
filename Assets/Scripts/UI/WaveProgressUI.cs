@@ -6,8 +6,6 @@ public class WaveProgressUI : MonoBehaviour
     public Slider slider;
     public WaveManager waveManager;
 
-    int totalEnemies = 0;
-
     void Start()
     {
         if (waveManager == null)
@@ -24,23 +22,14 @@ public class WaveProgressUI : MonoBehaviour
 
     void Update()
     {
-        if (waveManager == null || totalEnemies == 0) return;
-
-        int alive = waveManager.AliveEnemies;
-
-        slider.value = alive;
+        if (waveManager == null) return;
+        slider.value = waveManager.KilledEnemies;
     }
 
     void OnWaveStart()
     {
-        int waveIndex = waveManager.CurrentWave - 1;
-
-        if (waveIndex < 0 || waveIndex >= waveManager.waves.Length)
-            return;
-
-        totalEnemies = waveManager.waves[waveIndex].enemyCount;
-
-        slider.maxValue = totalEnemies;
-        slider.value = totalEnemies;
+        slider.minValue = 0;
+        slider.maxValue = waveManager.TotalEnemiesInWave;
+        slider.value = 0;
     }
 }

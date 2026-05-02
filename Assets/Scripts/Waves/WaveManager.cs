@@ -10,7 +10,7 @@ public class WaveManager : MonoBehaviour
         public int enemyCount = 5;
         public GameObject enemyPrefab;
         public Transform[] spawnPoints;
-        public float spawnInterval = 0.5f;   // задержка между спавном каждого врага
+        public float spawnInterval = 0.5f;
     }
 
     [Header("Waves")]
@@ -18,13 +18,18 @@ public class WaveManager : MonoBehaviour
     public float timeBetweenWaves = 3f;
 
     [Header("Events")]
-    public UnityEvent onWaveStart;           // начало волны
-    public UnityEvent<int> onWaveComplete;   // волна завершена (номер волны)
-    public UnityEvent onAllWavesComplete;    // все волны пройдены
+    public UnityEvent onWaveStart;
+    public UnityEvent<int> onWaveComplete;
+    public UnityEvent onAllWavesComplete;
 
     int currentWave = 0;
     int aliveEnemies = 0;
     bool isSpawning = false;
+
+    int totalEnemiesInWave = 0;
+    int killedEnemies = 0;
+    public int KilledEnemies => killedEnemies;
+    public int TotalEnemiesInWave => totalEnemiesInWave;
 
     void Start() => StartCoroutine(RunWaves());
 
@@ -33,9 +38,12 @@ public class WaveManager : MonoBehaviour
         foreach (Wave wave in waves)
         {
             yield return new WaitForSeconds(timeBetweenWaves);
+
+            totalEnemiesInWave = wave.enemyCount;
+            killedEnemies = 0;
+
             yield return StartCoroutine(SpawnWave(wave));
 
-            // Ждём пока все враги умрут
             yield return new WaitUntil(() => aliveEnemies <= 0 && !isSpawning);
 
             onWaveComplete?.Invoke(currentWave + 1);
@@ -54,25 +62,26 @@ public class WaveManager : MonoBehaviour
         {
             Transform spawnPoint = wave.spawnPoints[Random.Range(0, wave.spawnPoints.Length)];
 
-            // Спавним врага
             GameObject enemy = Instantiate(wave.enemyPrefab, spawnPoint.position, Quaternion.identity);
 
             var enemyScript = enemy.GetComponent<Enemy>();
-            if (enemyScript != null)
-            {
-                enemyScript.OnDied += HandleEnemyDied;
-                aliveEnemies++;
-            }
-
-            // Запускаем эффект появления
             var spawnEffect = enemy.GetComponent<EnemySpawnEffect>();
+
+            // сначала эффект
             if (spawnEffect != null)
             {
-                yield return StartCoroutine(spawnEffect.PlaySpawnEffect()); // ЖДЁМ, пока эффект полностью закончится
+                yield return StartCoroutine(spawnEffect.PlaySpawnEffect());
             }
             else
             {
                 Debug.LogWarning("EnemySpawnEffect component missing on enemy prefab!");
+            }
+
+            // потом регистрация
+            if (enemyScript != null)
+            {
+                enemyScript.OnDied += HandleEnemyDied;
+                aliveEnemies++;
             }
 
             yield return new WaitForSeconds(wave.spawnInterval);
@@ -81,7 +90,16 @@ public class WaveManager : MonoBehaviour
         isSpawning = false;
     }
 
-    void HandleEnemyDied() => aliveEnemies--;
+    void HandleEnemyDied()
+    {
+        if (killedEnemies >= totalEnemiesInWave) return;
+        aliveEnemies = Mathf.Max(0, aliveEnemies - 1);
+        killedEnemies++;
+        Debug.Log($"Killed: {killedEnemies} / {totalEnemiesInWave}");
+    }
+
+    public float WaveProgress =>
+        totalEnemiesInWave == 0 ? 0 : (float)killedEnemies / totalEnemiesInWave;
 
     // Геттеры для UI
     public int AliveEnemies => aliveEnemies;

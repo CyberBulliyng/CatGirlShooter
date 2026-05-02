@@ -25,5 +25,6 @@ public class FountaineDecayUI : MonoBehaviour
     void UpdateUI(float value)
     {
         slider.value = value;
+        slider.gameObject.SetActive(value > 0.01f);
     }
 }

@@ -34,6 +34,7 @@ public class PlayerHeal : MonoBehaviour
 
     public void AddCharge(int value)
     {
+        Debug.Log("HealDrop value: " + value);
         currentCharge = Mathf.Clamp(currentCharge + value, 0, maxCharge);
         OnChargeChanged?.Invoke(currentCharge, maxCharge);
     }

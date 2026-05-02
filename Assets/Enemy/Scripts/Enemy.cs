@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour, IEnemy
     public float attackRange = 0.6f;
     public int contactDamage = 1;
     public float attackCooldown = 1.2f;     // увеличил чуть для баланса
+    
+    bool isDead = false;
 
     public GameObject healDropPrefab;
     public GameObject fountain;
@@ -61,19 +63,29 @@ public class Enemy : MonoBehaviour, IEnemy
         if (dist > attackRange)
         {
             Vector2 dir = (target.position - transform.position).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 0.6f, LayerMask.GetMask("Obstacle"));
+
+            if (hit.collider != null)
+            {
+                Vector2 sideDir = new Vector2(-dir.y, dir.x);
+
+                RaycastHit2D sideHit = Physics2D.Raycast(transform.position, sideDir, 0.6f, LayerMask.GetMask("Obstacle"));
+
+                if (sideHit.collider == null)
+                    dir = sideDir;
+                else
+                    dir = -sideDir;
+            }
             rb.linearVelocity = dir * moveSpeed;
         }
         else
         {
             rb.linearVelocity = Vector2.zero;
-
-            // Атакуем только игрока
             if (target == player)
                 TryAttack();
         }
     }
 
-    // === ИСПРАВЛЕНИЕ ЗДЕСЬ ===
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerHealth>())
@@ -105,6 +117,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         OnDied?.Invoke();
         if (Random.value <= dropChance)
         {
