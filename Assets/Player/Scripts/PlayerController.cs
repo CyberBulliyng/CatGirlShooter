@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameState.IsPaused) return;
         moveInput = moveAction.action.ReadValue<Vector2>().normalized;
 
         // Поворот к курсору

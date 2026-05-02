@@ -57,7 +57,7 @@ public class WaveManager : MonoBehaviour
     {
         isSpawning = true;
         onWaveStart?.Invoke();
-
+        //CameraEffects.instance?.PlayWaveStartEffect();
         for (int i = 0; i < wave.enemyCount; i++)
         {
             Transform spawnPoint = wave.spawnPoints[Random.Range(0, wave.spawnPoints.Length)];

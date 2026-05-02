@@ -45,6 +45,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowLosePanel()
     {
+        GameState.IsPaused = true;
         gamePanel.SetActive(false);
         pausePanel.SetActive(false);
         losePanel.SetActive(true);
@@ -53,6 +54,7 @@ public class PauseMenu : MonoBehaviour
     public void ContinueGame()
     {
         GameIsPause = false;
+        GameState.IsPaused = false;
         Time.timeScale = 1.0f;
         gamePanel.SetActive(true);
         pausePanel.SetActive(false);
@@ -61,6 +63,7 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         GameIsPause = true;
+        GameState.IsPaused = true;
         Time.timeScale = 0.0f;
         pausePanel.SetActive(true);
     }

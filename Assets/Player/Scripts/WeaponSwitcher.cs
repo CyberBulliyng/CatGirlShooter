@@ -41,6 +41,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     void Update()
     {
+        if (GameState.IsPaused) return;
         // Переключение колёсиком
         float scroll = scrollAction.action.ReadValue<Vector2>().y;
         if (scroll > 0) EquipWeapon((currentIndex + 1) % weapons.Length);

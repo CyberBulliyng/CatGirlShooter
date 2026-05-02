@@ -1,5 +1,6 @@
 // Базовый враг
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour, IEnemy
@@ -20,6 +21,8 @@ public class Enemy : MonoBehaviour, IEnemy
     float nextAttackTime;        // переименовал для ясности
     Transform player;
     Rigidbody2D rb;
+    SpriteRenderer sr;
+    Color originalColor;
 
     [Range(0f, 1f)]
     public float dropChance = 0.5f;
@@ -32,6 +35,7 @@ public class Enemy : MonoBehaviour, IEnemy
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        sr = GetComponent<SpriteRenderer>();
 
         var p = PlayerController.instance;
         if (p) player = p.transform;
@@ -110,6 +114,7 @@ public class Enemy : MonoBehaviour, IEnemy
 
     public void TakeDamage(int amount)
     {
+        StartCoroutine(HitFlash());
         health -= amount;
         if (health <= 0)
             Die();
@@ -126,5 +131,13 @@ public class Enemy : MonoBehaviour, IEnemy
             Instantiate(healDropPrefab, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
+    }
+
+    IEnumerator HitFlash()
+    {
+        sr.color = new Color(1f, 0.3f, 0.3f, 1f); 
+        yield return new WaitForSeconds(0.08f);
+
+        sr.color = Color.white;
     }
 }
