@@ -1,4 +1,4 @@
-//  Базовый враг 
+// Базовый враг
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,13 +9,13 @@ public class Enemy : MonoBehaviour, IEnemy
     public float moveSpeed = 2f;
     public float attackRange = 0.6f;
     public int contactDamage = 1;
-    public float attackCooldown = 1f;
+    public float attackCooldown = 1.2f;     // увеличил чуть для баланса
+
     public GameObject healDropPrefab;
     public GameObject fountain;
-    public float switchDistance = 3f;
 
     int health;
-    float nextAttack;
+    float nextAttackTime;        // переименовал для ясности
     Transform player;
     Rigidbody2D rb;
 
@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public float dropChance = 0.5f;
 
     public event System.Action OnDied;
+
     void Start()
     {
         health = maxHealth;
@@ -36,8 +37,7 @@ public class Enemy : MonoBehaviour, IEnemy
         if (fountain == null)
         {
             GameObject f = GameObject.FindWithTag("Fontaine");
-            if (f != null)
-                fountain = f;
+            if (f != null) fountain = f;
         }
     }
 
@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour, IEnemy
         if (player == null) return;
 
         Transform target = GetTarget();
-
         float dist = Vector2.Distance(transform.position, target.position);
 
         if (dist > attackRange)
@@ -68,13 +67,14 @@ public class Enemy : MonoBehaviour, IEnemy
         {
             rb.linearVelocity = Vector2.zero;
 
-            // атакуем только игрока
+            // Атакуем только игрока
             if (target == player)
                 TryAttack();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // === ИСПРАВЛЕНИЕ ЗДЕСЬ ===
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerHealth>())
         {
@@ -84,15 +84,23 @@ public class Enemy : MonoBehaviour, IEnemy
 
     void TryAttack()
     {
-        if (Time.time < nextAttack) return;
-        nextAttack = Time.time + attackCooldown;
-        player.GetComponent<PlayerHealth>()?.TakeDamage(contactDamage);
+        if (Time.time < nextAttackTime)
+            return;
+
+        nextAttackTime = Time.time + attackCooldown;
+
+        var playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(contactDamage);
+        }
     }
 
     public void TakeDamage(int amount)
     {
         health -= amount;
-        if (health <= 0) Die();
+        if (health <= 0)
+            Die();
     }
 
     void Die()

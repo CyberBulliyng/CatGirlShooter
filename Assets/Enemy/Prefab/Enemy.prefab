@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3301447926685301414}
   - component: {fileID: 4601721838112209581}
   - component: {fileID: 1023876371557231992}
+  - component: {fileID: -6438286300570439886}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -80,17 +81,17 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2978021233501609917, guid: 493a7febd10622c4b8903d23a69c6acb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 493a7febd10622c4b8903d23a69c6acb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.826667, y: 6.826667}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &341598043935930604
 Rigidbody2D:
   serializedVersion: 5
@@ -134,10 +135,9 @@ MonoBehaviour:
   moveSpeed: 18
   attackRange: 1
   contactDamage: 1
-  attackCooldown: 0.1
+  attackCooldown: 1.5
   healDropPrefab: {fileID: 5680797872150920566, guid: 9233c8e5b915ac14fa435a2ebdd47131, type: 3}
   fountain: {fileID: 0}
-  switchDistance: 3
   dropChance: 0.5
 --- !u!58 &4601721838112209581
 CircleCollider2D:
@@ -173,8 +173,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0, y: 0.9}
+  m_Radius: 1
 --- !u!58 &1023876371557231992
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -209,5 +209,21 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 1
+  m_Offset: {x: 0, y: 0.9}
+  m_Radius: 1.7
+--- !u!114 &-6438286300570439886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982498931744312827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3be03a1804daa246941b0c131a17848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dirtSpritePrefab: {fileID: 5557251009980783662, guid: ea5e96e0c605afb4cb22c9d971d05d27, type: 3}
+  dirtMaskPrefab: {fileID: -4668431049931754480, guid: fef39bae87afed04abfd23c265685ed5, type: 3}
+  riseDistance: 10
+  riseDuration: 0.6

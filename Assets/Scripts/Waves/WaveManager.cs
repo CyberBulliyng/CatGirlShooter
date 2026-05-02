@@ -53,11 +53,27 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < wave.enemyCount; i++)
         {
             Transform spawnPoint = wave.spawnPoints[Random.Range(0, wave.spawnPoints.Length)];
+
+            // Спавним врага
             GameObject enemy = Instantiate(wave.enemyPrefab, spawnPoint.position, Quaternion.identity);
 
-            // Подписываемся на смерть врага
-            enemy.GetComponent<Enemy>().OnDied += HandleEnemyDied;
-            aliveEnemies++;
+            var enemyScript = enemy.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.OnDied += HandleEnemyDied;
+                aliveEnemies++;
+            }
+
+            // Запускаем эффект появления
+            var spawnEffect = enemy.GetComponent<EnemySpawnEffect>();
+            if (spawnEffect != null)
+            {
+                yield return StartCoroutine(spawnEffect.PlaySpawnEffect()); // ЖДЁМ, пока эффект полностью закончится
+            }
+            else
+            {
+                Debug.LogWarning("EnemySpawnEffect component missing on enemy prefab!");
+            }
 
             yield return new WaitForSeconds(wave.spawnInterval);
         }

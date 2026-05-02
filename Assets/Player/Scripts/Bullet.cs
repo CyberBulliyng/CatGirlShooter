@@ -21,11 +21,8 @@ public class Bullet : MonoBehaviour
         if (col.TryGetComponent<IEnemy>(out var enemy))
         {
             enemy.TakeDamage(damage);
-            Destroy(gameObject);
         }
-        else if (!col.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+
+        Destroy(gameObject);
     }
 }

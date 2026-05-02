@@ -6,4 +6,9 @@ public class MainMenuUI : MonoBehaviour
     {
         SceneTransition.SwitchToScene("Game");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

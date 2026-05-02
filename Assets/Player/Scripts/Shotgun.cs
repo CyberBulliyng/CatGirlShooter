@@ -26,12 +26,6 @@ public class Shotgun : WeaponBase
         Vector3 kickBack = originPos + Vector3.left * 0.15f;
 
         float t = 0;
-        while (t < chargeDuration)
-        {
-            transform.localPosition = Vector3.Lerp(originPos, kickBack, t / chargeDuration);
-            t += Time.deltaTime;
-            yield return null;
-        }
 
         // Выстрел
         for (int i = 0; i < pelletCount; i++)

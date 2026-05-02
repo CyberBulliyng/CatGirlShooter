@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     bool isGameOver = false;
+    public PauseMenu menu;
 
     public void Lose()
     {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0f;
 
+        menu.ShowLosePanel();
         // потом тут будет UI
         // ShowLoseScreen();
     }

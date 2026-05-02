@@ -73,5 +73,10 @@ public class WeaponSwitcher : MonoBehaviour
         current = weapons[index];
         current.gameObject.SetActive(true);
         OnWeaponChanged?.Invoke(currentIndex);
+
+        // Передаём новый SpriteRenderer оружия в PlayerController
+        var pc = GetComponent<PlayerController>();
+        if (pc != null)
+            pc.weaponRenderer = current.GetComponentInChildren<SpriteRenderer>();
     }
 }

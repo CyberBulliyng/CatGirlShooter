@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
 
+    [Header("Sorting")]
+    public SpriteRenderer playerRenderer;
+    public SpriteRenderer weaponRenderer;
 
     Rigidbody2D rb;
     Animator anim;
@@ -80,6 +83,13 @@ public class PlayerController : MonoBehaviour
         // ƒл€ Blend Tree Ч передаЄм направление к курсору
         anim.SetFloat("XMove", mouseDir.x);
         anim.SetFloat("YMove", mouseDir.y);
+
+        // ќружие поверх игрока только когда смотрим вниз
+        if (weaponRenderer != null && playerRenderer != null)
+        {
+            bool lookingDown = mouseDir.y < -0.3f;
+            weaponRenderer.sortingOrder = playerRenderer.sortingOrder + (lookingDown ? 1 : -1);
+        }
 
     }
 
