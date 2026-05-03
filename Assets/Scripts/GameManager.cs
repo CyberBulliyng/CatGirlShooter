@@ -20,6 +20,17 @@ public class GameManager : MonoBehaviour
         // ShowLoseScreen();
     }
 
+    public void Win()
+    {
+        isGameOver = true;
+
+        Debug.Log("YOU WIN");
+
+        Time.timeScale = 0f;
+
+        menu.ShowWinPanel();
+    }
+
     public void RestartLevel()
     {
         Time.timeScale = 1f;

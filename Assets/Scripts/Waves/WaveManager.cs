@@ -51,6 +51,7 @@ public class WaveManager : MonoBehaviour
         }
 
         onAllWavesComplete?.Invoke();
+        FindObjectOfType<GameManager>().Win();
     }
 
     IEnumerator SpawnWave(Wave wave)

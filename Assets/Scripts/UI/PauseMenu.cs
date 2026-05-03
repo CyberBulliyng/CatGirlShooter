@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject gamePanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject winPanel;
 
     [SerializeField] private InputActionReference pauseAction;
 
@@ -49,6 +50,16 @@ public class PauseMenu : MonoBehaviour
         gamePanel.SetActive(false);
         pausePanel.SetActive(false);
         losePanel.SetActive(true);
+        winPanel.SetActive(false);
+    }
+
+    public void ShowWinPanel()
+    {
+        GameState.IsPaused = true;
+        gamePanel.SetActive(false);
+        pausePanel.SetActive(false);
+        losePanel.SetActive(false);
+        winPanel.SetActive(true);
     }
 
     public void ContinueGame()
@@ -58,6 +69,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
         gamePanel.SetActive(true);
         pausePanel.SetActive(false);
+        winPanel.SetActive(false);
     }
 
     public void PauseGame()
