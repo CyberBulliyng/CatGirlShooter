@@ -12532,8 +12532,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemyCount: 3
-    enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
+  - enemies:
+    - enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 3332670421659740894, guid: 7771e06c3fc556d4485797c690ed8ba3, type: 3}
+      count: 2
     spawnPoints:
     - {fileID: 860555335}
     - {fileID: 495504113}
@@ -12541,8 +12544,11 @@ MonoBehaviour:
     - {fileID: 1382795081}
     - {fileID: 1545089000}
     spawnInterval: 0.5
-  - enemyCount: 6
-    enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
+  - enemies:
+    - enemyPrefab: {fileID: 6991550089685499433, guid: 3bdf41c47867cd14e830669bf2a36fed, type: 3}
+      count: 5
+    - enemyPrefab: {fileID: 8720090728804648731, guid: 5e44cd922cdc9ec4688325119268e6c6, type: 3}
+      count: 3
     spawnPoints:
     - {fileID: 860555335}
     - {fileID: 1020087379}
@@ -12554,9 +12560,12 @@ MonoBehaviour:
     - {fileID: 1948239615}
     - {fileID: 1545089000}
     - {fileID: 228783344}
-    spawnInterval: 0.5
-  - enemyCount: 9
-    enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
+    spawnInterval: 0.75
+  - enemies:
+    - enemyPrefab: {fileID: 6817535792115754466, guid: ff379cf34457da741bb12955084218dd, type: 3}
+      count: 7
+    - enemyPrefab: {fileID: 8903287403941654783, guid: 872cd31118476b0448db473f2981c125, type: 3}
+      count: 4
     spawnPoints:
     - {fileID: 2017857976}
     - {fileID: 1814422258}
@@ -12572,9 +12581,20 @@ MonoBehaviour:
     - {fileID: 699802538}
     - {fileID: 1948239615}
     - {fileID: 228783344}
-    spawnInterval: 0.5
-  - enemyCount: 2
-    enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
+    spawnInterval: 0.95
+  - enemies:
+    - enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 3332670421659740894, guid: 7771e06c3fc556d4485797c690ed8ba3, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 6991550089685499433, guid: 3bdf41c47867cd14e830669bf2a36fed, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 8720090728804648731, guid: 5e44cd922cdc9ec4688325119268e6c6, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 6817535792115754466, guid: ff379cf34457da741bb12955084218dd, type: 3}
+      count: 3
+    - enemyPrefab: {fileID: 8903287403941654783, guid: 872cd31118476b0448db473f2981c125, type: 3}
+      count: 3
     spawnPoints:
     - {fileID: 2017857976}
     - {fileID: 1814422258}
@@ -12599,8 +12619,8 @@ MonoBehaviour:
     - {fileID: 1661303540}
     - {fileID: 461422101}
     - {fileID: 1833655910}
-    spawnInterval: 0.5
-  timeBetweenWaves: 3
+    spawnInterval: 0.95
+  timeBetweenWaves: 4
   onWaveStart:
     m_PersistentCalls:
       m_Calls: []

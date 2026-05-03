@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WaveManager : MonoBehaviour
 {
     [System.Serializable]
+    public class EnemyGroup
+    {
+        public GameObject enemyPrefab;
+        public int count;
+    }
+
+    [System.Serializable]
     public class Wave
     {
-        public int enemyCount = 5;
-        public GameObject enemyPrefab;
+        public EnemyGroup[] enemies;  
         public Transform[] spawnPoints;
         public float spawnInterval = 0.5f;
     }
@@ -43,7 +50,11 @@ public class WaveManager : MonoBehaviour
         {
             yield return new WaitForSeconds(timeBetweenWaves);
 
-            totalEnemiesInWave = wave.enemyCount;
+            totalEnemiesInWave = 0;
+            foreach (var group in wave.enemies)
+            {
+                totalEnemiesInWave += group.count;
+            }
             killedEnemies = 0;
 
             yield return StartCoroutine(SpawnWave(wave));
@@ -71,26 +82,30 @@ public class WaveManager : MonoBehaviour
 
         onWaveStart?.Invoke();
         //CameraEffects.instance?.PlayWaveStartEffect();
-        for (int i = 0; i < wave.enemyCount; i++)
+        List<GameObject> spawnList = new List<GameObject>();
+
+        foreach (var group in wave.enemies)
+        {
+            for (int i = 0; i < group.count; i++)
+            {
+                spawnList.Add(group.enemyPrefab);
+            }
+        }
+        Shuffle(spawnList);
+        foreach (var prefab in spawnList)
         {
             Transform spawnPoint = wave.spawnPoints[Random.Range(0, wave.spawnPoints.Length)];
 
-            GameObject enemy = Instantiate(wave.enemyPrefab, spawnPoint.position, Quaternion.identity);
+            GameObject enemy = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
 
             var enemyScript = enemy.GetComponent<Enemy>();
             var spawnEffect = enemy.GetComponent<EnemySpawnEffect>();
 
-            // сначала эффект
             if (spawnEffect != null)
             {
                 yield return StartCoroutine(spawnEffect.PlaySpawnEffect());
             }
-            else
-            {
-                Debug.LogWarning("EnemySpawnEffect component missing on enemy prefab!");
-            }
 
-            // потом регистрация
             if (enemyScript != null)
             {
                 enemyScript.OnDied += HandleEnemyDied;
@@ -99,7 +114,6 @@ public class WaveManager : MonoBehaviour
 
             yield return new WaitForSeconds(wave.spawnInterval);
         }
-
         isSpawning = false;
     }
 
@@ -148,4 +162,13 @@ public class WaveManager : MonoBehaviour
     public int AliveEnemies => aliveEnemies;
     public int CurrentWave => currentWave + 1;
     public int TotalWaves => waves.Length;
+
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int randomIndex = Random.Range(i, list.Count);
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+        }
+    }
 }
