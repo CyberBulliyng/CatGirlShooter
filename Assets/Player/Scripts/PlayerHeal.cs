@@ -56,6 +56,7 @@ public class PlayerHeal : MonoBehaviour
         if (playerHealth.CurrentHealth >= playerHealth.MaxHealth) return;
 
         playerHealth.Heal(2);
+        PostProcessEffects.PlayHealEffect();
         sourceHeal.PlayOneShot(clipsHeal[Random.Range(0, clipsHeal.Length)]);
         currentCharge = 0;
         OnChargeChanged?.Invoke(currentCharge, maxCharge);

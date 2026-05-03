@@ -138,8 +138,10 @@ MonoBehaviour:
   contactDamage: 1
   attackCooldown: 1.5
   audioClips:
-  - {fileID: 8300000, guid: 9a97f517da6897844bc30e1675dc5bd1, type: 3}
-  - {fileID: 8300000, guid: 212f5377c516a7f4ba297724ffc7d296, type: 3}
+  - {fileID: 8300000, guid: 08775fd9454f7b943b77676e2ba3d114, type: 3}
+  - {fileID: 8300000, guid: ad827e44fdd3db340b8889018ffa10ea, type: 3}
+  - {fileID: 8300000, guid: cae4875338afab54d81aabaf5598f471, type: 3}
+  - {fileID: 8300000, guid: 97d23ea65a69e4943ba69e0f14bcd2aa, type: 3}
   healDropPrefab: {fileID: 5680797872150920566, guid: 9233c8e5b915ac14fa435a2ebdd47131, type: 3}
   fountain: {fileID: 0}
   dropChance: 0.5
@@ -231,7 +233,7 @@ MonoBehaviour:
   dirtMaskPrefab: {fileID: -4668431049931754480, guid: fef39bae87afed04abfd23c265685ed5, type: 3}
   riseDistance: 10
   riseDuration: 0.6
-  audioBirthClip: {fileID: 8300000, guid: 55a1b8d98ad7377448363db082a14b2b, type: 3}
+  audioBirthClip: {fileID: 8300000, guid: 137406b009cca7e47b3909af451b8f68, type: 3}
 --- !u!82 &7136378522302565676
 AudioSource:
   m_ObjectHideFlags: 0

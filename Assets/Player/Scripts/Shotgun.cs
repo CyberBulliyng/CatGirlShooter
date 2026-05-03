@@ -11,7 +11,11 @@ public class Shotgun : WeaponBase
     public float chargeDuration = 0.15f;   // небольшая задержка «перед выстрелом»
 
     bool isCharging;
-
+    void OnDisable()
+    {
+        isCharging = false;
+        StopAllCoroutines();
+    }
     public override bool CanShoot() => base.CanShoot() && !isCharging;
 
     public override void Shoot(Vector2 direction) => StartCoroutine(ShootRoutine(direction));

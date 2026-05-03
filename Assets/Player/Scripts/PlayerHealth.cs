@@ -55,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
         if (isDead || _isDying) return;
         currentHealth = Mathf.Max(0, currentHealth - amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        PostProcessEffects.PlayDamageEffect();
         sourceDamage.PlayOneShot(clipsDamage[UnityEngine.Random.Range(0, clipsDamage.Length)]);
         if (currentHealth <= 0) StartCoroutine(DieRoutine());
 
