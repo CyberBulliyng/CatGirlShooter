@@ -101,6 +101,12 @@ public class WaveManager : MonoBehaviour
             var enemyScript = enemy.GetComponent<Enemy>();
             var spawnEffect = enemy.GetComponent<EnemySpawnEffect>();
 
+            var gameMode = FindObjectOfType<GameMode_9Lives>();
+            if (gameMode != null && enemyScript != null)
+            {
+                gameMode.RegisterEnemy(enemyScript);
+            }
+
             if (spawnEffect != null)
             {
                 yield return StartCoroutine(spawnEffect.PlaySpawnEffect());

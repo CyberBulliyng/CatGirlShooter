@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ac8454d7c32104e45b6430e35858134b
+guid: 77deb86ecb50a7e4aa6d4e58c132e6ea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6239730862526555686
-    second: button_menu_on_0
+      213: -2827633642292068243
+    second: tablet_victory_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,6 +97,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -122,30 +135,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: button_menu_on_0
+      name: tablet_victory_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 38
-        width: 730
-        height: 261
+        x: 45
+        y: 52
+        width: 1465
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad9101d07d50869a0800000000000000
-      internalID: -6239730862526555686
+      spriteID: d60cc3c0f2a32c8d0800000000000000
+      internalID: -2827633642292068243
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      button_menu_on_0: -6239730862526555686
+      tablet_victory_0: -2827633642292068243
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

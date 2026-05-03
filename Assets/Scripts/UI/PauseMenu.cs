@@ -81,6 +81,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
+        GameIsPause = false;
         GameState.IsPaused = false;
         Time.timeScale = 1f;
         SceneTransition.SwitchToScene(SceneManager.GetActiveScene().name);
@@ -89,6 +90,7 @@ public class PauseMenu : MonoBehaviour
     public void BackMenu()
     {
         GameIsPause = false;
+        GameState.IsPaused = false;
         Time.timeScale = 1.0f;
         gamePanel.SetActive(true);
         pausePanel.SetActive(false);

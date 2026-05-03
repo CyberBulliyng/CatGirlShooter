@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         isGameOver = true;
+        PlayerPrefs.SetInt("9LivesUnlocked", 1);
 
         Debug.Log("YOU WIN");
 

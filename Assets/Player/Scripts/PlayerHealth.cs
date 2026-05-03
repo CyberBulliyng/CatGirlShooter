@@ -26,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
 
+    public bool is9LivesMode = false;
+
     private AudioSource sourceDamage;
     [SerializeField] private AudioClip[] clipsDamage;
 
@@ -65,6 +67,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int amount)
     {
+        if (is9LivesMode) return;
         if (isDead || _isDying) return;
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
@@ -86,8 +89,11 @@ public class PlayerHealth : MonoBehaviour
         // Тут можно проиграть анимацию смерти / спрятать объект
         GetComponent<SpriteRenderer>().enabled = false;
 
-        yield return new WaitForSeconds(respawnDelay);
-        Respawn();
+        if (!is9LivesMode)
+        {
+            yield return new WaitForSeconds(respawnDelay);
+            Respawn();
+        }
         _isDying = false;
     }
 
@@ -102,6 +108,23 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<PlayerController>().enabled = true;
         GetComponent<WeaponSwitcher>().enabled = true;*///Пока что закоменчено потому что мы ещё не решили когда возвращать игрока в начало или в чек поинт
+
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        OnRespawned?.Invoke();
+    }
+
+    public void ForceRespawn()
+    {
+        transform.position = respawnPoint != null ? respawnPoint.position : startPos;
+
+        currentHealth = maxHealth;
+        isDead = false;
+        _isRespawning = false;
+
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<PlayerController>().enabled = true;
+        GetComponent<WeaponSwitcher>().enabled = true;
+        GetComponent<Collider2D>().enabled = true;
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
         OnRespawned?.Invoke();
