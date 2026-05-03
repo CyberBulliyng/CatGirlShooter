@@ -7,6 +7,11 @@ public class MainMenuUI : MonoBehaviour
         SceneTransition.SwitchToScene("Game");
     }
 
+    public void StartIntro()
+    {
+        SceneTransition.SwitchToScene("Intro");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
