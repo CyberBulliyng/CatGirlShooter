@@ -81,6 +81,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
+        GameState.IsPaused = false;
         Time.timeScale = 1f;
         SceneTransition.SwitchToScene(SceneManager.GetActiveScene().name);
     }

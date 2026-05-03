@@ -21,6 +21,11 @@ public class ComicController : MonoBehaviour
     int currentFrame = 0;
     int currentPage = 1;
 
+    void Start()
+    {
+        ShowFirstFrame();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -54,7 +59,6 @@ public class ComicController : MonoBehaviour
         }
     }
 
-    // 👉 переход по кнопке со страницы 1
     public void GoToPage2()
     {
         page1.SetActive(false);
@@ -63,19 +67,19 @@ public class ComicController : MonoBehaviour
         currentPage = 2;
         currentFrame = 0;
 
-        // сброс кадров страницы 2
         foreach (var frame in page2Frames)
         {
             frame.SetActive(false);
         }
 
         page2Arrow.SetActive(false);
+        StartCoroutine(ShowFrame(page2Frames[0], page2AnimTypes[0]));
+        currentFrame = 1;
     }
 
-    // 👉 переход в игру (кнопка на странице 2)
     public void StartGame()
     {
-        SceneManager.LoadScene("Game"); // проверь имя сцены
+        SceneManager.LoadScene("Game");
     }
 
     IEnumerator ShowFrame(GameObject frame, FrameAnimType type)
@@ -157,5 +161,14 @@ public class ComicController : MonoBehaviour
         Scale,
         Rotate,
         Pop
+    }
+
+    void ShowFirstFrame()
+    {
+        if (currentPage == 1 && page1Frames.Length > 0)
+        {
+            StartCoroutine(ShowFrame(page1Frames[0], page1AnimTypes[0]));
+            currentFrame = 1;
+        }
     }
 }

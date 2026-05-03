@@ -12574,7 +12574,7 @@ MonoBehaviour:
     - {fileID: 1948239615}
     - {fileID: 228783344}
     spawnInterval: 0.5
-  - enemyCount: 18
+  - enemyCount: 2
     enemyPrefab: {fileID: 2982498931744312827, guid: 88b64f24cde47d7488f7a9da9f9f4ca6, type: 3}
     spawnPoints:
     - {fileID: 2017857976}
