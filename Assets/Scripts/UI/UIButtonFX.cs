@@ -22,7 +22,7 @@ public class UIButtonFX : MonoBehaviour,
     public float clickRotation = -5f;
 
     [Header("Color")]
-    public float hoverBrightness = 1.1f;
+    public float hoverBrightness = 1.02f;
     public float clickBrightness = 0.85f;
 
     void Start()

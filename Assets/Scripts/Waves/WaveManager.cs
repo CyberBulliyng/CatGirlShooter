@@ -22,6 +22,10 @@ public class WaveManager : MonoBehaviour
     public UnityEvent<int> onWaveComplete;
     public UnityEvent onAllWavesComplete;
 
+    [Header("Background")]
+    public SpriteRenderer backgroundRenderer;
+    public Sprite[] waveBackgrounds;
+
     int currentWave = 0;
     int aliveEnemies = 0;
     bool isSpawning = false;
@@ -57,6 +61,14 @@ public class WaveManager : MonoBehaviour
     IEnumerator SpawnWave(Wave wave)
     {
         isSpawning = true;
+        if (backgroundRenderer != null && waveBackgrounds.Length > 0)
+        {
+            int index = Mathf.Min(currentWave, waveBackgrounds.Length - 1);
+            Sprite newSprite = waveBackgrounds[index];
+
+            StartCoroutine(ChangeBackgroundSmooth(newSprite));
+        }
+
         onWaveStart?.Invoke();
         //CameraEffects.instance?.PlayWaveStartEffect();
         for (int i = 0; i < wave.enemyCount; i++)
@@ -89,6 +101,36 @@ public class WaveManager : MonoBehaviour
         }
 
         isSpawning = false;
+    }
+
+    IEnumerator ChangeBackgroundSmooth(Sprite newSprite)
+    {
+        float t = 0f;
+        float duration = 0.3f;
+
+        Color c = backgroundRenderer.color;
+
+        // fade out
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            c.a = Mathf.Lerp(1f, 0f, t / duration);
+            backgroundRenderer.color = c;
+            yield return null;
+        }
+
+        backgroundRenderer.sprite = newSprite;
+
+        t = 0f;
+
+        // fade in
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            c.a = Mathf.Lerp(0f, 1f, t / duration);
+            backgroundRenderer.color = c;
+            yield return null;
+        }
     }
 
     void HandleEnemyDied()

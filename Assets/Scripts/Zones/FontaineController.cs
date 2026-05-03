@@ -6,8 +6,8 @@ public class FountainController : MonoBehaviour
     public float maxValue = 100f;
     public float currentValue = 0f;
 
-    public float fillPerEnemy = 5f;
-    public float decaySpeed = 10f; 
+    public float fillPerEnemy = 1f;
+    public float decaySpeed = 4f; 
 
     int enemiesInZone = 0;
 
@@ -18,7 +18,7 @@ public class FountainController : MonoBehaviour
     {
         if (enemiesInZone > 0)
         {
-            currentValue += fillPerEnemy * enemiesInZone * Time.deltaTime;
+            currentValue += fillPerEnemy * enemiesInZone *0.4f * Time.deltaTime;
         }
         else
         {

@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: d67a613e9765d664c98c7ec25680d94b
+guid: fb3d91055278e5346a6ec25935b7a778
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8439703125552874721
-    second: menu_pause_0
+      213: -4008698039547929477
+    second: ememy_5_0
+  - first:
+      213: 8360330680465624097
+    second: ememy_5_1
+  - first:
+      213: 7007230460630480404
+    second: ememy_5_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,6 +103,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,13 +145,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: menu_pause_0
+      name: ememy_5_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 3840
-        height: 2160
+        x: 718
+        y: 554
+        width: 612
+        height: 1132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +160,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e44558f649df1570800000000000000
-      internalID: 8439703125552874721
+      spriteID: b7cd0fc3f5e3e58c0800000000000000
+      internalID: -4008698039547929477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ememy_5_1
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 417
+        width: 145
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12c04fd757cd50470800000000000000
+      internalID: 8360330680465624097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ememy_5_2
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 417
+        width: 145
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4163d216afeae3160800000000000000
+      internalID: 7007230460630480404
       vertices: []
       indices: 
       edges: []
@@ -161,7 +224,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      menu_pause_0: 8439703125552874721
+      ememy_5_0: -4008698039547929477
+      ememy_5_1: 8360330680465624097
+      ememy_5_2: 7007230460630480404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

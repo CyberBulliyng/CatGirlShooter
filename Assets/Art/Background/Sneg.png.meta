@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a64d211a543ad8f4bbc02f2bea6d3298
+guid: c4ef3a7263a898e4198f94946ced60e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4394694302168372352
-    second: intro2_0
+      213: -3649413495896204994
+    second: Sneg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: intro2_0
+      name: Sneg_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2560
-        height: 1440
+        width: 3840
+        height: 2160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 084dd290f271dfc30800000000000000
-      internalID: 4394694302168372352
+      spriteID: e39179ac2cdaa5dc0800000000000000
+      internalID: -3649413495896204994
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      intro2_0: 4394694302168372352
+      Sneg_0: -3649413495896204994
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
