@@ -14,6 +14,14 @@ public class PlayerHeal : MonoBehaviour
     [Header("Input")]
     public InputActionReference healAction;
 
+    private AudioSource sourceHeal;
+    [SerializeField] private AudioClip[] clipsHeal; 
+
+    private void Start()
+    {
+        sourceHeal = GetComponent<AudioSource>();
+    }
+
     void OnEnable()
     {
         healAction.action.Enable();
@@ -32,6 +40,8 @@ public class PlayerHeal : MonoBehaviour
         }
     }
 
+
+
     public void AddCharge(int value)
     {
         Debug.Log("HealDrop value: " + value);
@@ -46,6 +56,7 @@ public class PlayerHeal : MonoBehaviour
         if (playerHealth.CurrentHealth >= playerHealth.MaxHealth) return;
 
         playerHealth.Heal(2);
+        sourceHeal.PlayOneShot(clipsHeal[Random.Range(0, clipsHeal.Length)]);
         currentCharge = 0;
         OnChargeChanged?.Invoke(currentCharge, maxCharge);
     }

@@ -7,7 +7,7 @@ public class Crossbow : WeaponBase
     {
         if (!CanShoot()) return;
         nextFireTime = Time.time + 1f / fireRate;
-
+        PlayRandomShootSound();
         GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 

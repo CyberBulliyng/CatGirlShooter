@@ -26,6 +26,9 @@ public class PlayerHealth : MonoBehaviour
     public int CurrentHealth => currentHealth;
     public int MaxHealth => maxHealth;
 
+    private AudioSource sourceDamage;
+    [SerializeField] private AudioClip[] clipsDamage;
+
     void Awake()
     {
         if (instance == null)
@@ -42,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         startPos = transform.position;
-
+        sourceDamage = GetComponent<AudioSource>();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
@@ -52,10 +55,12 @@ public class PlayerHealth : MonoBehaviour
         if (isDead || _isDying) return;
         currentHealth = Mathf.Max(0, currentHealth - amount);
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
-
+        sourceDamage.PlayOneShot(clipsDamage[UnityEngine.Random.Range(0, clipsDamage.Length)]);
         if (currentHealth <= 0) StartCoroutine(DieRoutine());
 
     }
+
+
 
     public void Heal(int amount)
     {

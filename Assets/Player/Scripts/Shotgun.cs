@@ -26,7 +26,7 @@ public class Shotgun : WeaponBase
         Vector3 kickBack = originPos + Vector3.left * 0.15f;
 
         float t = 0;
-
+        PlayRandomShootSound();
         // Выстрел
         for (int i = 0; i < pelletCount; i++)
         {

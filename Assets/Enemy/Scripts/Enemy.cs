@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour, IEnemy
     public float attackCooldown = 1.2f;     // увеличил чуть для баланса
     
     bool isDead = false;
+    private AudioSource sourceEnemy;
+    [SerializeField] private AudioClip[] audioClips;
 
     public GameObject healDropPrefab;
     public GameObject fountain;
@@ -33,6 +35,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
+        sourceEnemy = GetComponent<AudioSource>();
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         sr = GetComponent<SpriteRenderer>();
@@ -115,9 +118,15 @@ public class Enemy : MonoBehaviour, IEnemy
     public void TakeDamage(int amount)
     {
         StartCoroutine(HitFlash());
+        PlaySound();
         health -= amount;
         if (health <= 0)
             Die();
+    }
+
+    void PlaySound()
+    {
+        sourceEnemy.PlayOneShot(audioClips[Random.Range(0, audioClips.Length)]);
     }
 
     void Die()

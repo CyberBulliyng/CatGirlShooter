@@ -13,9 +13,13 @@ public class EnemySpawnEffect : MonoBehaviour
     private SpriteMask currentMask;
     private Transform cachedTransform;
 
+    private AudioSource sourceEnemy;
+    [SerializeField] private AudioClip audioBirthClip;
+
     void Awake()
     {
         cachedTransform = transform;
+        sourceEnemy = GetComponent<AudioSource>();
     }
 
     public IEnumerator PlaySpawnEffect()
@@ -24,6 +28,8 @@ public class EnemySpawnEffect : MonoBehaviour
 
         Vector3 spawnPos = transform.position;
         GameObject dirt = null;
+
+        sourceEnemy.PlayOneShot(audioBirthClip);
         // 1. Создаём обычную землю (фон)
         if (dirtSpritePrefab != null)
         {
